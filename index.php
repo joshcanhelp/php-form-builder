@@ -56,7 +56,7 @@ $form->add_input('Email', array(
 
 $form->add_input('Filez', array(
 	'type' => 'file'
-), 'filez_bitch');
+), 'filez_here');
 
 $form->add_input('Reason for contacting', array(
 	'type' => 'checkbox',
