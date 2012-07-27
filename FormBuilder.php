@@ -10,10 +10,7 @@ class ThatFormBuilder {
 	// Make sure a submit button is output
 	private $has_submit = false;
 	
-	/*
-	Constructor to set basic form attributes
-	*/
-	
+	// Constructor to set basic form attributes
 	function __construct($action = '', $args = false) {
 		
 		$defaults = array(
@@ -37,9 +34,9 @@ class ThatFormBuilder {
 			if (!$this->set_att($key, $val)) $this->set_att($key, $defaults[$key]);
 		endforeach;
 	
-		
 	}
 	
+	// Set attributes for the form and special fields
 	function set_att($key, $val) {
 	
 		switch ($key) :
@@ -81,6 +78,7 @@ class ThatFormBuilder {
 		
 	}
 	
+	// Add an input to the queue
 	function add_input($label, $args = '', $slug = '') {
 		
 		if (empty($args)) $args = array();
@@ -118,6 +116,7 @@ class ThatFormBuilder {
 		
 	}
 	
+	// Add multiple inputs to the queue
 	function add_inputs($arr) {
 		
 		if (!is_array($arr)) return false;
@@ -128,6 +127,7 @@ class ThatFormBuilder {
 		
 	}
 	
+	// Parse the inputs and build the form HTML
 	function build_form() {
 	
 		$output = '
@@ -279,6 +279,7 @@ class ThatFormBuilder {
 		
 	}
 	
+	// :FIXIT: Add validation for classes and ids
 	private function _check_valid_attr($string) {
 		
 		$result = true;
@@ -290,6 +291,7 @@ class ThatFormBuilder {
 		
 	}
 	
+	// Easy way to auto-close fields, if necessary
 	function field_close() {
 			
 			return $this->form['markup'] === 'xhtml' ? ' />' : '>';
@@ -313,6 +315,7 @@ class ThatFormBuilder {
 		
 	}
 	
+	// Parses and builds the classes in multiple places
 	private function _output_classes($arr) {
 		
 		$output = '';
@@ -329,6 +332,7 @@ class ThatFormBuilder {
 		
 	}
 	
+	// Builds the select input output
 	private function _output_options_select($arr) {
 		$output = '';
 		foreach ($arr as $val => $opt) :
@@ -338,6 +342,7 @@ class ThatFormBuilder {
 		return $output;
 	}
 	
+	// Builds the radio button output
 	private function _output_options_radios($arr, $name) {
 		$output = '';
 		foreach ($arr as $val => $opt) :
@@ -351,6 +356,7 @@ class ThatFormBuilder {
 		return $output;
 	}
 	
+	// Builds the multiple checkbox output
 	private function _output_options_checkbox($arr, $name) {
 		$output = '';
 		foreach ($arr as $val => $opt) :
