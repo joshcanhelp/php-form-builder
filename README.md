@@ -10,10 +10,10 @@ Give it a try and let me know what you like, hate, and think needs to be fixed.
 
 The process for creating a form is simple:
 
-1) Instantiate the class
-2) Change any form attributes, if desired
-3) Add inputs, in order you want to see them
-4) Output the form
+1. Instantiate the class
+2. Change any form attributes, if desired
+3. Add inputs, in order you want to see them
+4. Output the form
 
 Let's walk through these one by one
 
