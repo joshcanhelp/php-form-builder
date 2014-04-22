@@ -36,6 +36,7 @@ This uses all the default settings for the form, which are as follows:
 * novalidate: false
 * add_nonce: false
 * add_honeypot: true
+* form_element: true
 
 Explanations for each of the settings are below
 
