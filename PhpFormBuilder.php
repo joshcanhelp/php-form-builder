@@ -1,8 +1,8 @@
 <?php
 
-// v 0.8.1
+// v 0.8.3
 
-class ThatFormBuilder {
+class PhpFormBuilder {
 	
 	// Stores all form inputs
 	private $inputs = array(); 
@@ -177,6 +177,11 @@ class ThatFormBuilder {
 			
 			switch ($val['type']) :
 				
+				case 'html':
+					$element = '';
+					$end = $val['label'];
+					break;
+				
 				case 'title':
 					$element = '';
 					$end = '
@@ -238,7 +243,7 @@ class ThatFormBuilder {
 			// Build the label
 			if (!empty($label_html)) :
 				$field .= $label_html;
-			elseif ($val['add_label'] && $val['type'] != 'hidden' && $val['type'] != 'submit') :
+			elseif ($val['add_label'] && $val['type'] != 'hidden' && $val['type'] != 'submit' && $val['type'] != 'title' && $val['type'] != 'html') :
 				$val['label'] .= $val['required'] ? ' <strong>*</strong>' : '';
 				$field .= '
 					<label for="' . $val['id'] . '">' . $val['label'] . '</label>';
@@ -251,7 +256,7 @@ class ThatFormBuilder {
 				$field .= $end;
 			
 			// Parse and create wrap, if needed
-			if ($val['type'] != 'hidden' && !empty($val['wrap_tag'])) :
+			if ($val['type'] != 'hidden' && $val['type'] != 'html' && !empty($val['wrap_tag'])) :
 			
 				$wrap_before = '
 				<' . $val['wrap_tag'];

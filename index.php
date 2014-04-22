@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Untitled Document</title>
+<title>PHhpFormBuilder test</title>
 </head>
 
 <body>
@@ -10,16 +10,13 @@
 
 <?php
 
-echo '<pre>';print_r($_REQUEST);echo '</pre>';
-echo '<pre>';print_r($_FILES);echo '</pre>';
-
-require_once('FormBuilder.php');
+require_once('PhpFormBuilder.php');
 	
 /*
 Create a new instance
 Pass in a URL to set the action
 */
-$form = new ThatFormBuilder();
+$form = new PhpFormBuilder();
 
 /*
 Form attributes are modified with the set_att function.
@@ -102,6 +99,16 @@ $form->add_inputs(array(
 Create the form
 */
 $form->build_form();
+
+/*
+ * Debugging
+ */
+echo '<pre>';
+print_r( $_REQUEST );
+echo '</pre>';
+echo '<pre>';
+print_r( $_FILES );
+echo '</pre>';
 ?>
 </body>
 </html>

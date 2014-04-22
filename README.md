@@ -22,7 +22,7 @@ Let's walk through these one by one
 This is pretty simple:
 
 ```php
-$new_form = new FormBuilder();
+$new_form = new PhpFormBuilder();
 ```
 
 This uses all the default settings for the form, which are as follows:
