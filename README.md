@@ -54,7 +54,7 @@ Once the form has been created, use the <code>set_att</code> function to change 
 $new_form->set_att('action', 'http://submit-here.com');
 
 // Change the submit method
-$new_form->set_att('method', ''get);
+$new_form->set_att('method', 'get');
 
 // Change the enctype
 $new_form->set_att('enctype', 'multipart/form-data');
@@ -63,7 +63,7 @@ $new_form->set_att('enctype', 'multipart/form-data');
 $new_form->set_att('markup', 'xhtml');
 
 // Classes are added as an array
-$new_form->set_att('class', 'array()');
+$new_form->set_att('class', array());
 
 // Add an id to the form
 $new_form->set_att('id', 'xhtml');
@@ -76,6 +76,9 @@ $new_form->set_att('add_nonce', 'build_a_nonce_using_this');
 
 // Adds a blank, hidden text field for spam control
 $new_form->set_att('add_honeypot', true);
+
+// Wraps the inputs with a form element
+$new_form->set_att('form_element', true);
 ```
 
 Currently, there are some restrictions to what can be added but no check as to whether the classes or ids are valid so be mindful of that. 

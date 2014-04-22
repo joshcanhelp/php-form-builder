@@ -1,6 +1,6 @@
 <?php
 
-// v 0.8.3
+// v 0.8.4
 
 class PhpFormBuilder {
 	
@@ -26,16 +26,23 @@ class PhpFormBuilder {
 			'novalidate' => false,
 			'add_nonce' => false,
 			'add_honeypot' => true,
+			'form_element' => true,
 		);
 		
-		if ($args) $settings = array_merge($defaults, $args);
-		else $settings = $defaults;
+		if ($args) {
+			$settings = array_merge($defaults, $args);
+		}
+		else {
+			$settings = $defaults;
+		}
 		
-		foreach ($settings as $key => $val) :
+		foreach ($settings as $key => $val) {
 			// Try setting with user-passed setting
 			// If not, try the default with the same key name
-			if (!$this->set_att($key, $val)) $this->set_att($key, $defaults[$key]);
-		endforeach;
+			if (!$this->set_att($key, $val)) {
+				$this->set_att($key, $defaults[$key]);
+			}
+		}
 	
 	}
 	
@@ -63,6 +70,7 @@ class PhpFormBuilder {
 			
 			case 'novalidate':
 			case 'add_honeypot':
+			case 'form_element':
 				if (! is_bool($val)) return false;
 				break;
 			
@@ -84,9 +92,13 @@ class PhpFormBuilder {
 	// Add an input to the queue
 	function add_input($label, $args = '', $slug = '') {
 		
-		if (empty($args)) $args = array();
-		// Create slug
-		if (empty($slug)) $slug = $this->_make_slug($label);
+		if (empty($args)) {
+			$args = array();
+		}
+
+		if (empty($slug)) {
+			$slug = $this->_make_slug($label);
+		}
 		
 		$defaults = array(
 			'type' => 'text',
@@ -132,21 +144,34 @@ class PhpFormBuilder {
 	
 	// Parse the inputs and build the form HTML
 	function build_form($echo = true) {
-	
-		$output = '
-		<form method="' . $this->form['method'] . '"';
-		
-		if (!empty($this->form['enctype'])) $output .= ' enctype="' . $this->form['enctype'] . '"';
-		
-		if (!empty($this->form['action'])) $output .= ' action="' . $this->form['action'] . '"';
-		
-		if (!empty($this->form['id'])) $output .= ' id="' . $this->form['id'] . '"';
-		
-		if (count($this->form['class']) > 0) $output .= $this->_output_classes($this->form['class']);
-		
-		if ($this->form['novalidate']) $output .= ' novalidate';
-		
-		$output .= '>';
+
+		$output = '';
+
+		if ( $this->form['form_element'] ) {
+			$output .= '<form method="' . $this->form['method'] . '"';
+
+			if (!empty($this->form['enctype'])) {
+				$output .= ' enctype="' . $this->form['enctype'] . '"';
+			}
+
+			if (!empty($this->form['action'])) {
+				$output .= ' action="' . $this->form['action'] . '"';
+			}
+
+			if (!empty($this->form['id'])) {
+				$output .= ' id="' . $this->form['id'] . '"';
+			}
+
+			if (count($this->form['class']) > 0) {
+				$output .= $this->_output_classes($this->form['class']);
+			}
+
+			if ($this->form['novalidate']) {
+				$output .= ' novalidate';
+			}
+
+			$output .= '>';
+		}
 		
 		if ($this->form['add_honeypot']) 
 			$this->add_input('Leave blank to submit', array(
@@ -279,12 +304,17 @@ class PhpFormBuilder {
 				<div class="form_field_wrap">
 					<input type="submit" value="Submit" name="submit">
 				</div>';
+
+		if ( $this->form['form_element'] ) {
+			$output .= '</form>';
+		}
 		
-		$output .= '
-		</form>';
-		
-		if ($echo) echo $output;
-		else return $output;
+		if ($echo) {
+			echo $output;
+		}
+		else {
+			return $output;
+		}
 		
 	}
 	

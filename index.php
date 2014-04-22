@@ -23,20 +23,22 @@ Form attributes are modified with the set_att function.
 First argument is the setting
 Second argument is the value
 */
-/*$form->set_att('method', 'post');
-$form->set_att('enctype', 'a_contact_form');
-$form->set_att('markup', 'html');
-$form->set_att('class', 'class_1');
-$form->set_att('class', 'class_2');
-$form->set_att('id', 'a_contact_form');
-$form->set_att('novalidate', true);
-$form->set_att('add_honeypot', false);
-$form->set_att('add_nonce', 'a_contact_form');
-
-*/
+/*
+ * $form->set_att('method', 'post');
+ * $form->set_att('enctype', 'a_contact_form');
+ * $form->set_att('markup', 'html');
+ * $form->set_att('class', 'class_1');
+ * $form->set_att('class', 'class_2');
+ * $form->set_att('id', 'a_contact_form');
+ * $form->set_att('novalidate', true);
+ * $form->set_att('add_honeypot', false);
+ * $form->set_att('add_nonce', 'a_contact_form');
+ * $form->set_att('form_element', false);
+ */
 
 $form->set_att('enctype', 'multipart/form-data');
 $form->set_att('method', 'post');
+
 
 /*
 Uss add_input to create form fields
