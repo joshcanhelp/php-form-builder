@@ -161,7 +161,7 @@ class PhpFormBuilder {
 			if (!empty($this->form['id'])) {
 				$output .= ' id="' . $this->form['id'] . '"';
 			}
-
+            
 			if (count($this->form['class']) > 0) {
 				$output .= $this->_output_classes($this->form['class']);
 			}
@@ -260,7 +260,8 @@ class PhpFormBuilder {
 			endswitch;
 			
 			$id = !empty($val['id']) ? ' id="' . $val['id'] . '"' : '';
-			$class = count($val['class']) ? ' class="' . $this->_output_classes($val['class']) . '"' : '';
+
+            $class =  $this->_output_classes($val['class']);
 			$attr = $val['autofocus'] ? ' autofocus' : '';
 			$attr = $val['checked'] ? ' checked' : '';
 			$attr = $val['required'] ? ' required' : '';
@@ -276,7 +277,7 @@ class PhpFormBuilder {
 			
 			if (!empty($element))
 				$field .= '
-					<' . $element . $id . ' name="' . $val['name'] . '"' . $min_max_range . $attr . $end;
+					<' . $element . $id . ' name="' . $val['name'] . '"' . $min_max_range .$class. $attr . $end;
 			else 
 				$field .= $end;
 			
@@ -359,13 +360,23 @@ class PhpFormBuilder {
 		
 		$output = '';
 		
-		if (count($arr) > 0) :
+		
 			$output .= ' class="';
-			foreach ($arr as $class) :
-				$output .= $class . ' ';
-			endforeach;
+            if(is_array($arr)) {  
+                
+                if (count($arr) > 0) : 
+                
+                    foreach ($arr as $class) :
+                        $output .= $class . ' ';
+                    endforeach; 
+                endif;
+            } 
+        
+            if(is_string($arr)) {
+                $output .= $arr . ' ';
+            }
+    
 			$output .= '"';
-		endif;
 		
 		return $output;
 		
