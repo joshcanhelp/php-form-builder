@@ -105,6 +105,7 @@ class PhpFormBuilder {
 			'name' => $slug,
 			'id' => $slug,
 			'label' => $label,
+            'lable_class' => '',
 			'value' => '',
 			'placeholder' => '',
 			'class' => array(),
@@ -119,9 +120,12 @@ class PhpFormBuilder {
 			'wrap_tag' => 'div',
 			'wrap_class' => array('form_field_wrap'),
 			'wrap_id' => '',
-			'wrap_style' => ''
-		
-		);
+			'wrap_style' => '',
+            'input_wrap_tag' => '',
+            'input_wrap_class' => '',
+            'input_wrap_id' => '',
+            'input_wrap_style' => '',
+ 		);
 		
 		// Combined defaults and arguments
 		// Arguments override defaults
@@ -262,6 +266,9 @@ class PhpFormBuilder {
 			$id = !empty($val['id']) ? ' id="' . $val['id'] . '"' : '';
 
             $class =  $this->_output_classes($val['class']);
+            $input_wrap_class =  $this->_output_classes($val['input_wrap_class']);
+            $lable_class = $this->_output_classes($val['lable_class']);
+        
 			$attr = $val['autofocus'] ? ' autofocus' : '';
 			$attr = $val['checked'] ? ' checked' : '';
 			$attr = $val['required'] ? ' required' : '';
@@ -272,12 +279,17 @@ class PhpFormBuilder {
 			elseif ($val['add_label'] && $val['type'] != 'hidden' && $val['type'] != 'submit' && $val['type'] != 'title' && $val['type'] != 'html') :
 				$val['label'] .= $val['required'] ? ' <strong>*</strong>' : '';
 				$field .= '
-					<label for="' . $val['id'] . '">' . $val['label'] . '</label>';
+					<label for="' . $val['id'] . '" '. $lable_class . '>' . $val['label'] . '</label>';
 			endif;
 			
 			if (!empty($element))
-				$field .= '
-					<' . $element . $id . ' name="' . $val['name'] . '"' . $min_max_range .$class. $attr . $end;
+                if(!empty($val['input_wrap_tag'])) {
+                    $field .= '<'.$val['input_wrap_tag'].' id="'.$val['input_wrap_id'].'" '.$input_wrap_class.'>';
+                }
+				$field .= '<' . $element . $id . ' name="' . $val['name'] . '"' . $min_max_range .$class. $attr . $end;
+                if(!empty($val['input_wrap_tag'])) {
+                    $field .= '</'.$val['input_wrap_tag'].'>';
+                }
 			else 
 				$field .= $end;
 			
