@@ -27,23 +27,24 @@ $new_form = new PhpFormBuilder();
 
 This uses all the default settings for the form, which are as follows:
 
-* action: empty, submit to current URL
-* method: post
-* enctype: application/x-www-form-urlencoded
-* class: none
-* id: none
-* markup: html
-* novalidate: false
-* add_nonce: false
-* add_honeypot: true
-* form_element: true
+* `action: empty, submit to current URL`
+* `method: post`
+* `enctype: application/x-www-form-urlencoded`
+* `class: none`
+* `id: none`
+* `markup: html`
+* `novalidate: false`
+* `add_nonce: false`
+* `add_honeypot: true`
+* `form_element: true`
+* `add_submit: true`
 
 Explanations for each of the settings are below
 
 You can also instantiate by passing in a URL, which becomes the action for the form:
 
 ```php
-$new_form = new FormBuilder('http://submit-here.com');
+$new_form = new PhpFormBuilder('http://submit-here.com');
 ```
 
 ### 2) Change any form attributes, if desired
@@ -80,6 +81,9 @@ $new_form->set_att('add_honeypot', true);
 
 // Wraps the inputs with a form element
 $new_form->set_att('form_element', true);
+
+// If no submit type is added, add one automatically
+$new_form->set_att('form_element', true);
 ```
 
 Currently, there are some restrictions to what can be added but no check as to whether the classes or ids are valid so be mindful of that. 
@@ -91,7 +95,7 @@ Inputs can be added one at a time or as a group. Either way, the order they are 
 Add fields using their label (in human-readable form), an array of settings, and a name/id slug, if needed.
 
 ```php
-$new_form->add_input('I'm a little field', array(), 'little_field')
+$new_form->add_input('I am a little field', array(), 'little_field')
 ```
 
 * Argument 1: A human-readable label that is parsed and turned into the name and id, if these options aren't explicitly set. If you use a simple label like "email" here, make sure to set a more specific name in argument 3.
