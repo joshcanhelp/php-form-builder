@@ -201,7 +201,9 @@ class PhpFormBuilder {
 	 *
 	 * @return string
 	 */
-	function build_form( $echo = true ) {
+	function build_form( $echo = true, $populate = array() ) {
+
+        $populate = array_intersect_key($populate, $this->inputs);
 
 		$output = '';
 
@@ -257,7 +259,6 @@ class PhpFormBuilder {
 
 		// Iterate through the input queue and add input HTML
 		foreach ( $this->inputs as $val ) :
-
 			$min_max_range = $element = $end = $attr = $field = $label_html = '';
 
 			// Automatic population of values using $_REQUEST data
@@ -268,6 +269,10 @@ class PhpFormBuilder {
 					$val['value'] = $_REQUEST[ $val['name'] ];
 				}
 			}
+
+            else if (isset($populate[$val['name']])) {
+                $val['value'] = $populate[$val['name']][0];
+            }
 
 			// Automatic population for checkboxes and radios
 			if (
@@ -495,7 +500,7 @@ class PhpFormBuilder {
 
 		$output = '';
 
-		
+
 		if ( is_array( $classes ) && count( $classes ) > 0 ) {
 			$output .= ' class="';
 			foreach ( $classes as $class ) {
