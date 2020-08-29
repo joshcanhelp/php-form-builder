@@ -1,0 +1,13 @@
+{
+    "name": "joshcanhelp/php-form-builder",
+    "description": "A simple, lightweight PHP class that makes creating forms easy",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Josh Cunningham",
+            "email": "josh@joshcanhelp.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
