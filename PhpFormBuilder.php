@@ -314,7 +314,7 @@ class PhpFormBuilder {
 							$opt_insert = ' selected';
 
 						// Does the field have a default selected value?
-						} else if ( $val['selected'] === $key ) {
+						} else if ( $val['value'] == $key ) {
 							$opt_insert = ' selected';
 						}
 						$end .= '<option value="' . $key . '"' . $opt_insert . '>' . $opt . '</option>';
